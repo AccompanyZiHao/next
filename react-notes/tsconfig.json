@@ -22,11 +22,17 @@
       }
     ],
     "paths": {
+      "@/actions": [
+        "app/[lng]/actions"
+      ],
       "@/components/*": [
         "components/*"
       ],
       "@/lib/*": [
         "lib/*"
+      ],
+      "@/*": [
+        "./*"
       ]
     }
   },
