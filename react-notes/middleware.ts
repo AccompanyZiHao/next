@@ -1,6 +1,9 @@
 import { match } from '@formatjs/intl-localematcher';
 import Negotiator from 'negotiator';
 import { locales, defaultLocale } from '@/config';
+import { NextResponse } from 'next/server';
+
+const publicFile = /\.(.*)$/;
 
 function getLocale(request) {
   const headers = { 'accept-language': request.headers.get('accept-language') || '' };
@@ -19,8 +22,19 @@ export function middleware(request) {
 
   if (pathnameHasLocale) return;
 
+  // 如果是 public 文件，不重定向
+  if (publicFile.test(pathname)) return;
+
   // 获取匹配的 locale
   const locale = getLocale(request);
+  // log(`=>(middleware.ts:30) locale , ${ locale }, ${ defaultLocale }`);
+
+
+  // 默认语言不重定向
+  if (locale == defaultLocale) {
+    return NextResponse.rewrite(request.nextUrl);
+  }
+
   request.nextUrl.pathname = `/${ locale }${ pathname }`;
   // 重定向，如 /products 重定向到 /en-US/products
   return Response.redirect(request.nextUrl);

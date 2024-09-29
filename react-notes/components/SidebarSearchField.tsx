@@ -13,7 +13,8 @@ function Spinner({ active = true }) {
   );
 }
 
-export default function SidebarSearchField() {
+export default function SidebarSearchField({ dicSearch }) {
+
   const { replace } = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
@@ -34,11 +35,12 @@ export default function SidebarSearchField() {
   return (
     <div className="search" role="search">
       <label className="offscreen" htmlFor="sidebar-search-input">
-        Search for a note by title
+        {/*Search for a note by title*/ }
+        { dicSearch }
       </label>
       <input
         id="sidebar-search-input"
-        placeholder="Search"
+        placeholder={ dicSearch }
         type="text"
         onChange={ (e) => handleSearch(e.target.value) }
       />
