@@ -4,6 +4,7 @@ import { useTranslation } from '@/app/i18n';
 
 // 导入组件
 import SidebarSearchField from '@/components/SidebarSearchField';
+import SidebarSearchField2 from '@/components/SidebarSearchField2';
 import SidebarNoteList from '@/components/SidebarNoteList';
 import EditButton from '@/components/EditButton';
 import NoteListSkeleton from '@/components/NoteListSkeleton';
@@ -28,7 +29,10 @@ export default async function Sidebar({ lng }) {
           </section>
         </Link>
         <section className="sidebar-menu" role="menubar">
-          <SidebarSearchField dicSearch={ t('search') }/>
+          {/*不使用客户端*/ }
+          {/*<SidebarSearchField dicSearch={ t('search') }/>*/ }
+          {/*使用客户端*/ }
+          <SidebarSearchField2 lng={ lng }/>
           <EditButton noteId={ null }>{ t('new') }</EditButton>
         </section>
         <nav>
